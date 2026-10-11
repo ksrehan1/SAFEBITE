@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SafeBite | Check a menu against your allergies</title>
+  <meta name="description" content="Add your allergens, scan a menu, and see which dishes are safe, need a question for the chef, or should be avoided.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%230B6E6E'/%3E%3Cpath d='M9 16.5l5 5 9-10' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Icon sprite: used with <svg><use href="#i-name"></use></svg> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-safe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M7 12.5l3.2 3.2L17 8.8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-ask" viewBox="0 0 24 24"><path d="M12 2.5l10 17.5H2z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 9v5M12 17v.01" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-avoid" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor"/><path d="M8 8l8 8M16 8l-8 8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="10" r="1.6" fill="currentColor"/><path d="M4 17l5-4.5 3.5 3 3-2.5 4.5 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 8.5v4M12 15.5v.01M7 9h2M7 12h2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  </svg>
+
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <button class="brand" type="button" data-go="home" aria-label="SafeBite home">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#0B6E6E"/><path d="M9 16.5l5 5 9-10" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>SafeBite</span>
+    </button>
+    <nav aria-label="Main">
+      <button type="button" class="nav-btn" data-go="profile">Profile</button>
+      <button type="button" class="nav-btn" data-go="scan">Scan</button>
+      <button type="button" class="nav-btn" data-go="results">Results</button>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- HOME -->
+    <section id="view-home" class="view home" aria-labelledby="home-title">
+      <div class="home-copy">
+        <h1 id="home-title">Know what is in the dish before you order it.</h1>
+        <p class="lede">Add your allergens once. Photograph a menu or scan its QR code. SafeBite marks every dish as safe, ask the chef, or avoid.</p>
+        <div class="actions">
+          <button type="button" class="btn primary" id="home-cta">Set up my profile</button>
+          <button type="button" class="btn ghost" id="home-sample">See a sample result</button>
+        </div>
+        <p class="fineprint">Your details stay in this browser and are never uploaded. Results depend on what the menu says, so always confirm with the restaurant.</p>
+      </div>
+
+      <figure class="menu-card" aria-label="Example of a checked menu for someone with peanut and milk allergies">
+        <figcaption>Checked for peanuts and milk</figcaption>
+        <ul>
+          <li style="--d:0.3s"><div><strong>Paneer Tikka</strong><span>Contains milk (paneer, yogurt)</span></div><span class="chip chip-avoid"><svg aria-hidden="true"><use href="#i-avoid"/></svg>Avoid</span></li>
+          <li style="--d:0.6s"><div><strong>Pad Thai</strong><span>Often has peanuts. Menu is silent.</span></div><span class="chip chip-ask"><svg aria-hidden="true"><use href="#i-ask"/></svg>Ask the chef</span></li>
+          <li style="--d:0.9s"><div><strong>Dal Tadka</strong><span>No listed allergen found</span></div><span class="chip chip-safe"><svg aria-hidden="true"><use href="#i-safe"/></svg>Looks safe</span></li>
+          <li style="--d:1.2s"><div><strong>Peanut Butter Brownie</strong><span>Contains peanuts, milk</span></div><span class="chip chip-avoid"><svg aria-hidden="true"><use href="#i-avoid"/></svg>Avoid</span></li>
+        </ul>
+      </figure>
+    </section>
+
+    <!-- PROFILE -->
+    <section id="view-profile" class="view" aria-labelledby="profile-title" hidden>
+      <h1 id="profile-title" class="view-title" tabindex="-1">Your health profile</h1>
+      <p class="view-sub">Tell SafeBite what to look out for. This is saved on this device only.</p>
+
+      <form id="profile-form" novalidate>
+        <fieldset>
+          <legend>About you</legend>
+          <div class="grid">
+            <div class="field">
+              <label for="f-name">Full name</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required>
+              <p class="err" id="err-name" hidden></p>
+            </div>
+            <div class="field">
+              <label for="f-age">Age</label>
+              <input id="f-age" name="age" type="number" inputmode="numeric" min="1" max="120" required>
+              <p class="err" id="err-age" hidden></p>
+            </div>
+            <div class="field wide">
+              <label for="f-email">Email</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" required>
+              <p class="err" id="err-email" hidden></p>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Emergency contact</legend>
+          <div class="grid">
+            <div class="field">
+              <label for="f-ec-name">Contact name</label>
+              <input id="f-ec-name" name="ecName" type="text" autocomplete="off" required>
+              <p class="err" id="err-ecName" hidden></p>
+            </div>
+            <div class="field">
+              <label for="f-ec-phone">Contact phone</label>
+              <input id="f-ec-phone" name="ecPhone" type="tel" autocomplete="off" required>
+              <p class="err" id="err-ecPhone" hidden></p>
+            </div>
+            <div class="field wide">
+              <label for="f-ec-rel">Relationship <span class="opt">(optional)</span></label>
+              <input id="f-ec-rel" name="ecRel" type="text" autocomplete="off">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Allergens to avoid</legend>
+          <div class="chips" id="allergen-chips" role="group" aria-label="Allergens"></div>
+          <div class="field">
+            <label for="f-other">Other allergens <span class="opt">(separate with commas)</span></label>
+            <input id="f-other" name="other" type="text" placeholder="for example: kiwi, coconut" autocomplete="off">
+          </div>
+          <p class="err" id="err-allergens" hidden></p>
+
+          <div class="severity" role="radiogroup" aria-labelledby="sev-label">
+            <p id="sev-label" class="label-like">How serious are your reactions?</p>
+            <label class="radio"><input type="radio" name="severity" value="mild"><span>Mild</span></label>
+            <label class="radio"><input type="radio" name="severity" value="moderate" checked><span>Moderate</span></label>
+            <label class="radio"><input type="radio" name="severity" value="severe"><span>Severe (anaphylaxis)</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Health conditions</legend>
+          <div class="chips" id="condition-chips" role="group" aria-label="Health conditions"></div>
+          <div class="field">
+            <label for="f-other-cond">Other conditions <span class="opt">(optional)</span></label>
+            <input id="f-other-cond" name="otherConditions" type="text" autocomplete="off">
+          </div>
+          <p class="hint">Celiac disease adds wheat and gluten to your avoid list. Lactose intolerance adds milk. Diabetes flags sweet dishes.</p>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Save and continue</button>
+          <button type="button" class="btn ghost" id="clear-data" hidden>Delete my saved data</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- SCAN -->
+    <section id="view-scan" class="view" aria-labelledby="scan-title" hidden>
+      <h1 id="scan-title" class="view-title" tabindex="-1">Add a menu</h1>
+      <p class="view-sub">Upload a photo of the menu or a QR code. SafeBite reads it on your device.</p>
+
+      <div class="dropzone" id="dropzone">
+        <svg class="drop-icon" aria-hidden="true"><use href="#i-image"/></svg>
+        <p><strong>Drop a menu photo or QR code here</strong></p>
+        <div class="drop-actions">
+          <label class="btn primary file-btn">
+            <svg aria-hidden="true"><use href="#i-camera"/></svg>Take a photo
+            <input type="file" id="file-camera" accept="image/*" capture="environment" hidden>
+          </label>
+          <label class="btn ghost file-btn">
+            <svg aria-hidden="true"><use href="#i-image"/></svg>Choose a file
+            <input type="file" id="file-pick" accept="image/*" hidden>
+          </label>
+        </div>
+      </div>
+
+      <div id="scan-progress" class="progress" hidden>
+        <p id="scan-status" role="status" aria-live="polite"></p>
+        <progress id="scan-bar" max="100" value="0"></progress>
+      </div>
+      <p id="scan-message" class="notice" role="status" aria-live="polite" hidden></p>
+
+      <div class="field menu-text">
+        <label for="menu-text">Menu text <span class="opt">(fix anything that was misread, one dish per line)</span></label>
+        <textarea id="menu-text" rows="10" spellcheck="false" placeholder="Paneer Tikka - cottage cheese, yogurt, spices 180&#10;Dal Tadka - lentils, cumin, garlic 160"></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn primary" id="analyse">Check this menu</button>
+        <button type="button" class="btn ghost" id="use-sample">Use a sample menu</button>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="view-results" class="view" aria-labelledby="results-title" hidden>
+      <h1 id="results-title" class="view-title" tabindex="-1">Your results</h1>
+      <p id="demo-banner" class="notice" hidden>You are viewing a sample profile (peanuts and milk). Set up your own profile to check a menu for you.</p>
+      <p class="view-sub" id="results-sub"></p>
+
+      <div class="summary" id="summary" role="group" aria-label="Filter dishes by result"></div>
+
+      <div class="disclaimer" role="note">
+        <svg aria-hidden="true"><use href="#i-ask"/></svg>
+        <p><strong>This is not a guarantee.</strong> SafeBite only sees what the menu says. Ingredients change and kitchens share equipment, so tell the staff about your allergy before you order.</p>
+      </div>
+
+      <ul class="dishes" id="dish-list"></ul>
+
+      <div class="form-actions">
+        <button type="button" class="btn primary" id="scan-another">Scan another menu</button>
+        <button type="button" class="btn ghost" id="open-card"><svg aria-hidden="true"><use href="#i-card"/></svg>Show allergy card to staff</button>
+      </div>
+    </section>
+
+  </main>
+
+  <dialog id="card-dialog" aria-labelledby="card-title">
+    <div id="card-body"></div>
+    <form method="dialog"><button class="btn primary" type="submit">Close</button></form>
+  </dialog>
+
+  <footer class="footer">
+    <p>SafeBite is a hackathon prototype. It supports your decision. It does not replace asking the restaurant.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js" defer></script>
+  <script src="js/knowledge.js" defer></script>
+  <script src="js/scanner.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
